@@ -19,10 +19,12 @@ ENV APACHE_RUN_DIR /var/run/apache2
 ENV APACHE_LOCK_DIR /var/lock/apache2
 RUN mkdir -p $APACHE_RUN_DIR $APACHE_LOCK_DIR $APACHE_LOG_DIR
 
+COPY apache2-foreground /usr/local/bin/
+
+
 EXPOSE 80
 EXPOSE 443
 
 WORKDIR /var/www/
 
-ENTRYPOINT ["/usr/sbin/apache2"]
-CMD ["-D", "FOREGROUND"]
+CMD ["apache2-foreground"]
